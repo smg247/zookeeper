@@ -46,13 +46,12 @@ public class DataCache {
             throw new IllegalArgumentException("Attempted to mark a node as accessed when it was not found in the list of all tracked nodes.");
         }
 
-        removeLeastRecentlyUsedNodePathsUntilCanAccommodateSize(size);
-
-        cachedNodes.put(pathToNode, size);
-
         if (!nodeInCache) {
+            removeLeastRecentlyUsedNodePathsUntilCanAccommodateSize(size);
             currentSize += size;
         }
+
+        cachedNodes.put(pathToNode, size);
 
         LOG.info("After marking a node as accessed the cache is now: " + currentSize + " bytes.");
 
